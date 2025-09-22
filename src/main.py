@@ -38,5 +38,5 @@ def delete_todo(todo_id: int):
     for index, todo in enumerate(todos):
         if todo.id == todo_id:
             deleted = todos.pop(index)
-            return {"message": "Todo deleted successfully", "todo": deleted}
-    return {"error": "Todo Not Found"}
+        
+    return {"error": "Deleteion error"}
