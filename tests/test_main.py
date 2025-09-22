@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
-from src.main import app
+from src.main import api
 
-client = TestClient(app)
+client = TestClient(api)
 
 
 # Test home endpoint

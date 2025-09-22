@@ -2,30 +2,31 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List
 
-app = FastAPI()
+api = FastAPI()
 
 class Todo(BaseModel):
     id: int
     name: str
     des: str
 
-# in-memory database
 todos: List[Todo] = []
 
-@app.get("/")
+@api.get("/")
 def index():
-    return {"Message": "hello world"}
+    return {"Message" : "Hello World"}
 
-@app.get("/todo")
+
+@api.get("/todo")
 def get_todos():
     return todos
 
-@app.post("/todo")
+
+@api.post("/todo")
 def add_todo(todo: Todo):
     todos.append(todo)
     return todos
 
-@app.put("/todo/{todo_id}")
+@api.put("/todo/{todo_id}")
 def update_todo(todo_id: int, updated_todo: Todo):
     for index, todo in enumerate(todos):
         if todo.id == todo_id:
@@ -33,10 +34,12 @@ def update_todo(todo_id: int, updated_todo: Todo):
             return todos
     return {"error": "Todo Not Found"}
 
-@app.delete("/todo/{todo_id}")
+
+@api.delete("/todo/{todo_id}")
 def delete_todo(todo_id: int):
     for index, todo in enumerate(todos):
-        if todo.id == todo_id:
+        if todo.id==todo_id:
             deleted = todos.pop(index)
-        
-    return {"error": "Deleteion error"}
+            return deleted
+    
+    return {"error":"Deleteion error"}
